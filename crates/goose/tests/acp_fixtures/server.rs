@@ -374,6 +374,14 @@ impl Connection for AcpServerConnection {
                                     .is_some(),
                                 "initialize response must advertise session/delete"
                             );
+                            assert!(
+                                resp.agent_capabilities
+                                    .session_capabilities
+                                    .fork
+                                    .as_ref()
+                                    .is_some(),
+                                "initialize response must advertise session/fork"
+                            );
 
                             *cx_holder.lock().unwrap() = Some(cx.clone());
                             let _ = ready_tx.send(());

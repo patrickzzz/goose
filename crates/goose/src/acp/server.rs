@@ -53,11 +53,11 @@ use agent_client_protocol::schema::v1::{
     McpCapabilities, McpServer, Meta, NewSessionRequest, NewSessionResponse, PermissionOption,
     PermissionOptionKind, PromptCapabilities, PromptRequest, PromptResponse,
     RequestPermissionOutcome, RequestPermissionRequest, ResourceLink, SessionCapabilities,
-    SessionCloseCapabilities, SessionConfigOption, SessionDeleteCapabilities, SessionId,
-    SessionInfoUpdate, SessionListCapabilities, SessionNotification, SessionUpdate,
-    SetSessionConfigOptionRequest, SetSessionConfigOptionResponse, SetSessionModeRequest,
-    SetSessionModeResponse, StopReason, TextContent, ToolCallId, ToolCallUpdate, Usage,
-    UsageUpdate,
+    SessionCloseCapabilities, SessionConfigOption, SessionDeleteCapabilities,
+    SessionForkCapabilities, SessionId, SessionInfoUpdate, SessionListCapabilities,
+    SessionNotification, SessionUpdate, SetSessionConfigOptionRequest,
+    SetSessionConfigOptionResponse, SetSessionModeRequest, SetSessionModeResponse, StopReason,
+    TextContent, ToolCallId, ToolCallUpdate, Usage, UsageUpdate,
 };
 use agent_client_protocol::schema::ProtocolVersion;
 use agent_client_protocol::util::MatchDispatchFrom;
@@ -1834,7 +1834,8 @@ impl GooseAcpAgent {
                 SessionCapabilities::new()
                     .list(SessionListCapabilities::new())
                     .delete(SessionDeleteCapabilities::new())
-                    .close(SessionCloseCapabilities::new()),
+                    .close(SessionCloseCapabilities::new())
+                    .fork(SessionForkCapabilities::new()),
             )
             .prompt_capabilities(
                 PromptCapabilities::new()
